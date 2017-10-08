@@ -6,7 +6,5 @@ Suricate (in Brazilian Portuguese) is a small species of foraging mammal that is
 
 The configurations setting is defined on the `config.py` file.
 
-- MONGO_DB_URL: Database address to connect to a MongoDB instance, [see more](https://docs.mongodb.com/manual/reference/connection-string/). Example: `mongodb://localhost:27020/mydb`.
-
-
+- MONGO_DB_URL: Database address to connect to a MongoDB instance, [see more](https://docs.mongodb.com/manual/reference/connection-string/).
 
