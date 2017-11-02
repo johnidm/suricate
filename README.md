@@ -8,3 +8,8 @@ The configurations setting is defined on the `config.py` file.
 
 - MONGO_DB_URL: Database address to connect to a MongoDB instance, [see more](https://docs.mongodb.com/manual/reference/connection-string/).
 
+
+
+
+mkdir data
+docker run -d -p 27017:27107 -v data:/data/db mongo
