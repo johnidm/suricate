@@ -14,3 +14,10 @@ $ suricate --helps
 ### Understanding the Configurations
 
 The configurations setting is defined on the `config.py` file.
+
+### Setup MongoDB with Docker 
+
+```
+docker volume create mongodbdata
+docker run -d -p 27017:27017 -v mongodbdata:/data/db mongo
+```

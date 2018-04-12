@@ -7,9 +7,9 @@ from storage import MongoDB
 class Suricate():
 
     def collect(self, tag, keywords):
-        click.echo(click.style('Iniciando a coleta de dados'))
-        click.echo(click.style(f'  tag: {tag}', fg='blue'))
-        click.echo(click.style(f'  keywords: {keywords}', fg='blue'))
+        click.echo(click.style('Iniciando a coleta de dados', fg='white', bold=True))
+        click.echo(click.style(f'  tag: {tag}', fg='white', bold=True))
+        click.echo(click.style(f'  keywords: {keywords}', fg='white', bold=True))
 
         storage = MongoDB(tag)
         midia = Twitter(storage)

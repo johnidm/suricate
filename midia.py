@@ -4,6 +4,8 @@ from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
 
 import config
+import json
+import click
 
 
 class Twitter():
@@ -14,10 +16,10 @@ class Twitter():
             self.storage = storage
 
         def on_data(self, data):
-            storage.insert(json.loads(data))
+            self.storage.insert(json.loads(data))
 
             click.echo(click.style(
-                f'Tamanho do retorno({len(data)}) - {str(datetime.now())}', fd='greem'))
+                f'Tamanho do retorno({len(data)}) - {str(datetime.now())}', fg='white', bold=True))
 
             return True
 
