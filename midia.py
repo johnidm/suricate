@@ -1,7 +1,8 @@
-from tweepy.streaming import StreamListener
-from tweepy import OAuthHandler
-from tweepy import Stream
 from datetime import datetime
+
+from tweepy import OAuthHandler, Stream
+from tweepy.streaming import StreamListener
+
 import config
 
 

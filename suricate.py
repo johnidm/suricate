@@ -1,6 +1,7 @@
-from storage import MongoDB
-from midia import Twitter
 import click
+
+from midia import Twitter
+from storage import MongoDB
 
 
 class Suricate():
@@ -16,4 +17,3 @@ class Suricate():
 
     def statistics(self):
         pass
-
