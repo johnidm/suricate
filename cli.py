@@ -24,3 +24,16 @@ def collect(suricate, tag, keywords):
             'É necessário informar as palavras chaves para a busca.', param_hint=['--keywords'])
 
     suricate.collect(tag, keywords)
+
+
+@cli.command('extract')
+@click.option('--tag', help='Marca os registros recuperados')
+@click.option('--rule')
+@click.pass_obj
+def extract(suricate, tag, rule):
+
+    if rule is None:
+        raise click.BadParameter(
+            'É necessário informar a regra para extrair os dados', param_hint=['--rule'])
+
+    suricate.extract(tag, rule)

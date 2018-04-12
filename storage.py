@@ -1,16 +1,20 @@
+
 import pymongo
 
 import config
+import statistic
 
 
 class MongoDB():
 
     def __init__(self, collection_name):
-        self.collection_name = collection_name
-
         client = pymongo.MongoClient(config.MONGO_DB_URL)
-        self.db = client.suricate
+        db = client.suricate
+        self.collection = db[collection_name]
 
     def insert(self, json):
-        collection = self.db[self.collection_name]
-        collection.insert_one(json)
+        self.collection.insert_one(json)
+
+    def query(self, rule):
+        cursor = list(self.collection.find({}))
+        statistic.apply_rule(cursor, rule)
