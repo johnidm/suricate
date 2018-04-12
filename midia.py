@@ -1,11 +1,11 @@
+import json
 from datetime import datetime
 
+import click
 from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
 
 import config
-import json
-import click
 
 
 class Twitter():
