@@ -21,3 +21,14 @@ The configurations setting is defined on the `config.py` file.
 docker volume create mongodbdata
 docker run -d -p 27017:27017 -v mongodbdata:/data/db mongo
 ```
+
+### Development environment 
+
+I am using Jupyter Notebook to test the code. 
+
+```
+pip install jupyter
+```
+```
+jupyter notebook
+```
