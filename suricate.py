@@ -1,5 +1,6 @@
 import click
 
+import report
 from midia import Twitter
 from storage import MongoDB
 
@@ -17,6 +18,8 @@ class Suricate():
         midia = Twitter(storage)
         midia.collect(keywords.split(','))
 
-    def extract(self, tag, rule):
+    def report(self, tag, model):
         storage = MongoDB(tag)
-        storage.query(rule)
+        data = storage.data()
+
+        report.apply(data, model)

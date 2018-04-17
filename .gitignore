@@ -110,4 +110,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+*.csv
+
 # End of https://www.gitignore.io/api/python,jupyternotebook

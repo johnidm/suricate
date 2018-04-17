@@ -3,8 +3,8 @@ import re
 import click
 
 
-def apply_rule(cursor, rule):
-    data = RULES[rule](cursor)
+def apply(cursor, model):
+    data = RULES[model](cursor)
 
     save_to_csv_file(data)
 
@@ -51,12 +51,12 @@ def get_text(data):
 
 def get_text_not_retweeted(data):
     texts = get_text(data)
-    return [t for t in texts if not match(REGEX_RETWEETED, t[1])]
+    return [t for t in texts if not match(REGEX_RETWEETED, t['id'])]
 
 
 def get_text_retweeted(data):
     texts = get_text(data)
-    return [t for t in texts if match(REGEX_RETWEETED, t[1])]
+    return [t for t in texts if match(REGEX_RETWEETED, t['text'])]
 
 
 RULES = {
