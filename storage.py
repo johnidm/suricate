@@ -2,7 +2,6 @@
 import pymongo
 
 import config
-import statistic
 
 
 class MongoDB():
@@ -15,6 +14,5 @@ class MongoDB():
     def insert(self, json):
         self.collection.insert_one(json)
 
-    def query(self, rule):
-        cursor = list(self.collection.find({}))
-        statistic.apply_rule(cursor, rule)
+    def data(self):
+        return list(self.collection.find({}))

@@ -9,7 +9,7 @@ def cli(ctx):
     ctx.obj = Suricate()
 
 
-@cli.command('collect')
+@cli.command()
 @click.option('--tag', help='Marca os registros recuperados')
 @click.option('--keywords', help='Palavras chaves, separadas por ponto e virgula, utilizadas na busca por tuites')
 @click.pass_obj
@@ -26,14 +26,27 @@ def collect(suricate, tag, keywords):
     suricate.collect(tag, keywords)
 
 
-@cli.command('extract')
+@cli.command()
 @click.option('--tag', help='Marca os registros recuperados')
-@click.option('--rule')
+@click.option('--model')
 @click.pass_obj
-def extract(suricate, tag, rule):
+def report(suricate, tag, model):
 
-    if rule is None:
+    if model is None:
         raise click.BadParameter(
-            'É necessário informar a regra para extrair os dados', param_hint=['--rule'])
+            'É necessário informar um modelo para extrair os dados', param_hint=['--model'])
 
-    suricate.extract(tag, rule)
+    suricate.report(tag, model)
+
+
+@cli.command()
+@click.option('--tag', help='Marca os registros recuperados')
+@click.option('--name')
+@click.pass_obj
+def rule(suricate, tag, name):
+
+    if name is None:
+        raise click.BadParameter(
+            'É necessário informar o nome da regra a ser aplicada.', param_hint=['--name'])
+
+    suricate.rule(tag, name)
