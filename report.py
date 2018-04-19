@@ -2,46 +2,30 @@ import re
 
 import click
 
+from utils import match, save_to_csv
+
 
 def apply(cursor, model):
     data = RULES[model](cursor)
-
-    save_to_csv_file(data)
-
-    return data
+    save_to_csv(data)
 
 
-def save_to_csv_file(data):
-    import csv
-    import time
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-
-    filename = f'{timestr}.csv'
-
-    fieldnames = list(data[0].keys())
-
-    with open(filename, 'w') as f:
-        wr = csv.DictWriter(f, fieldnames)
-        wr.writeheader()
-        wr.writerows(data)
-
-    click.echo(f'Salvando dados em {filename}')
+RULES = {
+    'screen-name': __get_display_name,
+    'text-not-retweeted': __get_text_not_retweeted,
+    'text-retweeted': __get_text_retweeted,
+    'text': __get_text,
+}
 
 
-REGEX_RETWEETED = r'RT @(.+):'
-
-
-def match(r, t): return bool(re.search(r, t))
-
-
-def get_display_name(data):
+def __get_display_name(data):
 
     return [{
         'username': d['user']['screen_name']
     } for d in data]
 
 
-def get_text(data):
+def __get_text(data):
 
     return [{
         'id': d['id_str'],
@@ -49,19 +33,11 @@ def get_text(data):
     } for d in data]
 
 
-def get_text_not_retweeted(data):
+def __get_text_not_retweeted(data):
     texts = get_text(data)
     return [t for t in texts if not match(REGEX_RETWEETED, t['id'])]
 
 
-def get_text_retweeted(data):
+def __get_text_retweeted(data):
     texts = get_text(data)
     return [t for t in texts if match(REGEX_RETWEETED, t['text'])]
-
-
-RULES = {
-    'screen-name': get_display_name,
-    'text-not-retweeted': get_text_not_retweeted,
-    'text-retweeted': get_text_retweeted,
-    'text': get_text,
-}

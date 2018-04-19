@@ -37,3 +37,16 @@ def report(suricate, tag, model):
             'É necessário informar um modelo para extrair os dados', param_hint=['--model'])
 
     suricate.report(tag, model)
+
+
+@cli.command()
+@click.option('--tag', help='Marca os registros recuperados')
+@click.option('--name')
+@click.pass_obj
+def rule(suricate, tag, name):
+
+    if name is None:
+        raise click.BadParameter(
+            'É necessário informar o nome da regra a ser aplicada.', param_hint=['--name'])
+
+    suricate.rule(tag, name)

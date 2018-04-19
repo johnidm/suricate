@@ -1,6 +1,7 @@
 import click
 
 import report
+import rule
 from midia import Twitter
 from storage import MongoDB
 
@@ -23,3 +24,9 @@ class Suricate():
         data = storage.data()
 
         report.apply(data, model)
+
+    def rule(self, tag, name):
+        storage = MongoDB(tag)
+        data = storage.data()
+
+        rule.apply(data, name)
