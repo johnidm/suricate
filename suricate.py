@@ -15,7 +15,12 @@ class Suricate():
         click.echo(click.style(
             f'  keywords: {keywords}', fg='white', bold=True))
 
-        storage = MongoDB(tag)
+        meta = {
+            'collection_name': tag,
+            'keywords': keywords,
+        }
+
+        storage = MongoDB(meta)
         midia = Twitter(storage)
         midia.collect(keywords.split(','))
 

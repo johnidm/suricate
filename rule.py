@@ -11,7 +11,7 @@ def apply(data, name):
     RULES[name](data)
 
 
-def __check_similarity(data):
+def check_similarity(data):
     from difflib import SequenceMatcher
     import itertools
 

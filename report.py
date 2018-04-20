@@ -6,16 +6,16 @@ from utils import match, save_to_csv
 
 
 def apply(cursor, model):
+
+    RULES = {
+        'screen-name': __get_display_name,
+        'text-not-retweeted': __get_text_not_retweeted,
+        'text-retweeted': __get_text_retweeted,
+        'text': __get_text,
+    }
+
     data = RULES[model](cursor)
     save_to_csv(data)
-
-
-RULES = {
-    'screen-name': __get_display_name,
-    'text-not-retweeted': __get_text_not_retweeted,
-    'text-retweeted': __get_text_retweeted,
-    'text': __get_text,
-}
 
 
 def __get_display_name(data):
