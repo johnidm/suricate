@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<h1>Bot By Name</h1>
+
+{% for bot in data %}
+<li>
+    <a href="https://twitter.com/{{ bot }}">{{ bot }}</a>
+</li>
+{% endfor %}
+
+{% endblock %}

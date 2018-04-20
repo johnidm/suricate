@@ -32,3 +32,35 @@ pip install jupyter
 ```
 jupyter notebook
 ```
+
+### Avaliable commands
+
+#### Collect
+
+Realiza a coleta de dados
+```
+suricate collect --tag="" --keywords=""
+```
+
+#### Report
+
+Extrai dados de uma coleção e salva em arquivos CSV
+```
+suricate report --tag="" --model=""
+```
+
+Relatórios disponíveis
+- screen-name
+- text-not-retweeted
+- text-retweeted
+- text
+
+#### Rules
+Executar regras de extração de dados e gera um arquivo HTML
+```
+suricate rule --tag="" --name=""
+```
+
+Regras disponíveis (name):
+- check-similarity
+- bot-by-name

@@ -15,21 +15,19 @@ class MongoDB():
         self.meta = meta
 
     def insert(self, data):
+
+        metadata = {
+            'collected_date': datetime.now(),
+        }
+
+        metadata.update(self.meta)
+
         one = {
             'data': data,
-            'metadata': {
-                'date': datetime.now(),
-                'keywords': self.meta['keywords']
-                # 'computer_name': 'johni-pc',
-                'computer_ip': self.__get_ip()
-            }
+            'metadata': metadata
         }
 
         self.collection.insert_one(one)
 
     def data(self):
         return list(self.collection.find({}))
-
-    def __get_ip(self):
-        import socket
-        return socket.gethostbyname(socket.gethostname())

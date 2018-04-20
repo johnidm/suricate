@@ -1,4 +1,11 @@
+import csv
 import re
+import time
+
+import click
+from jinja2 import Environment, FileSystemLoader
+
+import config
 
 REGEX_RETWEETED = r'RT @(.+):'
 REGEX_BOT_BY_NAME = r'\w{5,}\d{5,}'
@@ -7,12 +14,27 @@ REGEX_BOT_BY_NAME = r'\w{5,}\d{5,}'
 def match(r, t): return bool(re.search(r, t))
 
 
-def save_to_csv(data):
-    import csv
-    import time
-    timestr = time.strftime("%Y%m%d-%H%M%S")
+def save_to_html(data, template_name):
 
-    filename = f'{timestr}.csv'
+    env = Environment(
+        autoescape=False,
+        loader=FileSystemLoader('./templates'),
+        trim_blocks=False)
+
+    template = env.get_template(f'{template_name}.html')
+    output = template.render(data=data)
+
+    filename = __generate_file_name('html')
+
+    with open(filename, 'w') as f:
+        f.write(output)
+
+    click.echo(f'Salvando dados em {filename}')
+
+
+def save_to_csv(data):
+
+    filename = __generate_file_name('csv')
 
     fieldnames = list(data[0].keys())
 
@@ -22,3 +44,8 @@ def save_to_csv(data):
         wr.writerows(data)
 
     click.echo(f'Salvando dados em {filename}')
+
+
+def __generate_file_name(extension):
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    return f'{config.OUTPUT_FILE_DIRECTORY}{timestr}.{extension}'

@@ -25,13 +25,23 @@ class Suricate():
         midia.collect(keywords.split(','))
 
     def report(self, tag, model):
-        storage = MongoDB(tag)
+
+        meta = {
+            'collection_name': tag,
+        }
+
+        storage = MongoDB(meta)
         data = storage.data()
 
         report.apply(data, model)
 
     def rule(self, tag, name):
-        storage = MongoDB(tag)
+
+        meta = {
+            'collection_name': tag,
+        }
+
+        storage = MongoDB(meta)
         data = storage.data()
 
         rule.apply(data, name)

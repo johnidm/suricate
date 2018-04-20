@@ -1,19 +1,20 @@
-from utils import REGEX_BOT_BY_NAME, REGEX_RETWEETED, match
+import itertools
+from difflib import SequenceMatcher
+
+from utils import REGEX_BOT_BY_NAME, REGEX_RETWEETED, match, save_to_html
 
 
 def apply(data, name):
 
     RULES = {
-        'check-similarity': __check_similarity,
-        'bot-by-name': __bot_by_name,
+        'check-similarity': check_similarity,
+        'bot-by-name': bot_by_name,
     }
 
     RULES[name](data)
 
 
 def check_similarity(data):
-    from difflib import SequenceMatcher
-    import itertools
 
     def similar(a, b):
         ratio = SequenceMatcher(None, a, b).ratio()
@@ -22,7 +23,7 @@ def check_similarity(data):
     def check_similarity(a, b):
         return a, b, similar(a['text'], b['text'])
 
-    tuites = [t for t in data if not match(REGEX_RETWEETED, t['text'])][:200]
+    tuites = [t for t in data if not match(REGEX_RETWEETED, t['text'])]
     print('Total tuites', len(tuites))
 
     similarity = []
@@ -33,14 +34,10 @@ def check_similarity(data):
 
     duplicated_tweets = [(a, b) for a, b, ratio in similarity if ratio >= 0.7]
 
-    urls = [
-        f'https://twitter.com/statuses/{t}' for t in duplicated_tweets
-    ]
-
-    print(urls)
+    save_to_html(duplicated_tweets, 'check-similarity')
 
 
-def __bot_by_name(data):
+def bot_by_name(data):
 
     all_screen_name = [
         d['user']['screen_name'] for d in data]
@@ -49,8 +46,4 @@ def __bot_by_name(data):
         s for s in all_screen_name if match(REGEX_BOT_BY_NAME, s)
     ]
 
-    urls = [
-        f'https://twitter.com/{s}' for s in set(bots)
-    ]
-
-    print(urls)
+    save_to_html(bots, 'bot-by-name')
