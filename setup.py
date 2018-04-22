@@ -13,6 +13,7 @@ setup(
         'pymongo',
         'python-dotenv',
         'click',
+        'jinja2',
     ],
     entry_points={
         'console_scripts': 'suricate=cli:cli'
