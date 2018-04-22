@@ -37,30 +37,36 @@ jupyter notebook
 
 #### Collect
 
-Realiza a coleta de dados
+Collects data and saves to a Mongo collection
+
 ```
 suricate collect --tag="" --keywords=""
 ```
 
 #### Report
 
-Extrai dados de uma coleção e salva em arquivos CSV
+Extract data and save to CSV file.
+
 ```
 suricate report --tag="" --model=""
 ```
 
-Relatórios disponíveis
+Avaliable reports:
+
 - screen-name
 - text-not-retweeted
 - text-retweeted
 - text
 
 #### Rules
-Executar regras de extração de dados e gera um arquivo HTML
+
+Run the rules to extract data. Save in the HTML file.
+
 ```
 suricate rule --tag="" --name=""
 ```
 
-Regras disponíveis (name):
+Avaliabl rules:
+
 - check-similarity
 - bot-by-name
