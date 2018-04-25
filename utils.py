@@ -4,14 +4,23 @@ import time
 
 import click
 from jinja2 import Environment, FileSystemLoader
-
+from functools import reduce
+import operator
 import config
 
 REGEX_RETWEETED = r'RT @(.+):'
 REGEX_BOT_BY_NAME = r'\w{5,}\d{5,}'
+REGEX_HTML_TAG = '<[^<>]+>'
 
 
 def match(r, t): return bool(re.search(r, t))
+
+
+def extract_html_tag(t): return re.sub(REGEX_HTML_TAG, '', t)
+
+
+def flat_list(data):
+    return reduce(operator.concat, data)
 
 
 def save_to_html(data, template_name):

@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<h1>Bot By Name</h1>
+
+{% for url in data %}
+<li>
+    <a href="{{url}}">{{ url }}</a>
+</li>
+{% endfor %}
+
+{% endblock %}

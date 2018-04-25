@@ -1,7 +1,7 @@
 import itertools
 from difflib import SequenceMatcher
 
-from utils import REGEX_BOT_BY_NAME, REGEX_RETWEETED, match, save_to_html
+from utils import REGEX_BOT_BY_NAME, REGEX_RETWEETED, match, save_to_html, flat_list
 
 
 def apply(data, name):
@@ -9,9 +9,18 @@ def apply(data, name):
     RULES = {
         'check-similarity': check_similarity,
         'bot-by-name': bot_by_name,
+        'tweet-urls': tweet_url,
     }
 
     RULES[name](data)
+
+
+def tweet_url(data):
+    urls_raw = list(filter(None, [d['entities']['urls'] for d in data]))
+
+    urls = [d['expanded_url'] for d in flat_list(urls_raw)]
+
+    save_to_html(urls, 'tweet-urls')
 
 
 def check_similarity(data):
