@@ -25,7 +25,18 @@ class Twitter():
 
         def on_error(self, status):
             click.echo(click.style(
-                f'Erro ao coletar os dados - {status}', fd='red', bold=True))
+                f'Erro ao coletar os dados - {status}', fg='red', bold=True))
+
+        def on_limit(self, track):
+            click.echo(click.style(
+                'Limite de leitura atingido', fg='yellow', bold=True))
+            return True
+
+        def on_connect(self):
+            click.echo(click.style('Conexão iniciada', fg='white', bold=True))
+
+        def on_disconnect(self, notice):
+            click.echo(click.style('Conexão fechada', fg='white', bold=True))
 
     def __init__(self, storage):
         self.storage = storage
