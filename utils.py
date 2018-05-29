@@ -12,6 +12,8 @@ REGEX_RETWEETED = r'RT @(.+):'
 REGEX_BOT_BY_NAME = r'\w{5,}\d{5,}'
 REGEX_HTML_TAG = '<[^<>]+>'
 
+__version__ = '0.0.2'
+
 
 def match(r, t): return bool(re.search(r, t))
 

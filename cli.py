@@ -1,11 +1,14 @@
 import click
 
 from suricate import Suricate
+from utils import __version__
 
 
 @click.group()
 @click.pass_context
 def cli(ctx):
+    click.echo(click.style(
+        f'Suricate versão - {__version__}\n', fg='white', bold=True))
     ctx.obj = Suricate()
 
 

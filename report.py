@@ -57,7 +57,7 @@ def get_display_name(data):
 
 
 def get_text(data):
-    
+
     return [{
         'id': d['id_str'],
         'text': d['text'],

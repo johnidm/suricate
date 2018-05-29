@@ -1,9 +1,11 @@
 from setuptools import find_packages, setup
 
+from utils import __version__
+
 setup(
     name='suricate',
     url='https://github.com/rougeth/rabisco/',
-    version='0.0.1',
+    version=__version__,
     author='Johni Douglas Marangon',
     author_email='johni.douglas.marangon@gmail.com',
     packages=find_packages(),
